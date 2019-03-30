@@ -1,0 +1,44 @@
+{% extends 'test1.html' %}
+<p>This is test 2.</p>
+
+{% block content %}
+
+    {% block two %}
+        <p>This is test2 content two block.</p>
+    {% endblock %}
+
+    {% include 'test3.html' %}
+
+{% endblock %}
+
+
+<li class="{% if request.path|slice:'1' == '' %}active{% endif %}">
+    <a href="{% url 'index' %}">首页</a>
+</li>
+<li class="{% if request.path|slice:'9' == '/courses/' %}active{% endif %}">
+    <a href="{% url 'course_list' %}">
+        公开课<img class="hot" src="{% static 'images/nav_hot.png' %}">
+    </a>
+</li>
+<li class="{% if request.path|slice:'10' == '/teachers/' %}active{% endif %}">
+    <a href="{% url 'teacher_list' %}">授课教师</a>
+</li>
+<li class="{% if request.path|slice:'5' == '/org/' %}active{% endif %}">
+    <a href="{% url 'org_list' %}">授课机构</a>
+</li>
+
+
+<form class="clearfix" id="jsAvatarForm" enctype="multipart/form-data" autocomplete="off"
+      method="post" action="{% url 'image_upload' %}" target='frameFile'>
+    <label class="changearea" for="avatarUp">
+        <span id="avatardiv" class="pic">
+            <img width="100" height="100" class="js-img-show" id="avatarShow"
+                 src="{{ MEDIA_URL }}{{ request.user.image }}"/></span>
+        <span class="fl upload-inp-box" style="margin-left:70px;">
+            <span class="button btn-green btn-w100" id="jsAvatarBtn">修改头像</span>
+            <input type="file" name="image" id="avatarUp" class="js-img-up"/>
+        </span>
+    </label>
+    {% csrf_token %}
+</form>
+

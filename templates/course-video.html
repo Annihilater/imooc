@@ -1,0 +1,36 @@
+{% extends 'course-info.html' %}
+{% load static %}
+
+{% block title %}
+    {{ video.name }} - 慕学在线网
+{% endblock %}
+
+{% block custom_css_extra %}
+    <link href=”http://vjs.zencdn.net/c/video-js.css” rel=”stylesheet”>
+    <script src=”http://vjs.zencdn.net/c/video.js”></script>
+{% endblock %}
+
+{% block custom_bread %}
+    <section>
+        <div class="wp">
+            <div class="crumbs">
+                <ul>
+                    <li><a href="{% url 'index' %}">首页</a>></li>
+                    <li><a href="{% url 'course_list' %}">公开课程</a>></li>
+                    <li><a href="{% url 'course_detail' course.id %}">{{ course.name }}</a>></li>
+                    <li>{{ video.name }}</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block content_one %}
+    <div style="width: 1200px;height: 675px;margin-left: 340px">
+        <video id="" class="video-js vjs-default-skin" controls preload='auto' width="1200"
+               poster="{{ MEDIA_URL }}{{ video.image }}" data-setup="{}">
+            <source src="{{ video.lesson.url }}" type='video/mp4'>
+        </video>
+    </div>
+{% endblock %}
